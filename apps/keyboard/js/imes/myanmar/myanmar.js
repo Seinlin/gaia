@@ -15,13 +15,13 @@
   var BACKSPACE = 8;
 
   var M = {
-    consonT: new RegExp('^(' +
+    consoTT: new RegExp('^(' +
              '\u1000|\u1001|\u1002|\u1003|\u1005|\u1006|\u1007|\u1008|' +
              '\u1009|\u100A|\u100B|\u100C|\u100D|\u100E|\u100F|\u1010|' +
              '\u1011|\u1012|\u1013|\u1014|\u1015|\u1016|\u1017|\u1018|' +
              '\u1019|\u101A|\u101B|\u101C|\u101D|\u101E|\u101F|\u1020|' +
              '\u1021' + ')$'),
-    consnSA: new RegExp('^(' +  '\u101E' + ')$'),
+    consoSA: new RegExp('^(' +  '\u101E' + ')$'),
     vowelIA: new RegExp('^(' +
              '\u102D|\u102E|\u1032|\u1036|\u102F|\u1030|\u102B|\u102C' + ')$'),
     vowelIU: new RegExp('^(' +  '\u102D|\u102E|\u102F|\u1030' + ')$'),
@@ -62,8 +62,8 @@
 //  \u103E + \u1031 + \u103B => $3 + $1 + $2
 //  \u103E + \u1031 + \u103C => $3 + $1 + $2
 //  \u103E + \u1031 + \u103D => $3 + $1 + $2
-//  \u1031 + \u1039 + consonT[*] => $2 + $3 + $1
-//  \u200B + \u1031 + consonT[*] => $3 + $2
+//  \u1031 + \u1039 + consoTT[*] => $2 + $3 + $1
+//  \u200B + \u1031 + consoTT[*] => $3 + $2
 //  \u1031 + mediaYH[*] => $2 + $1
 //  \u1036 + \u1032 => $2 +$1
 //  \u1037 + vowelSI[*] => $2 + $1
@@ -82,25 +82,25 @@
 //  vowelIN[*] + vowelSI[*] => $2 + $1
 //==================================================================
   var SWAP_RULE = [
-      // p1 + p2 + p3 + p4 => p4 + p1 + p2 + p3
-      { num: 4, out: 4, t:1, p1: M.mediaWA, p2: M.mediaHA, p3: M.vowelSE, p4: M.mediaYR },
-      // p1 + p2 + p3 => p3 + p2
-      { num: 3, out: 2, t:1, p1: M.zeroLEN, p2: M.vowelSE, p3: M.consonT },
-      // p1 + p2 + p3 => p3 + p1 + p2
-      { num: 3, out: 3, t:1, p1: M.mediaWA, p2: M.vowelSE, p3: M.mediaYR },
-      { num: 3, out: 3, t:1, p1: M.mediaWA, p2: M.mediaHA, p3: M.mediaYR },
-      { num: 3, out: 3, t:1, p1: M.mediaHA, p2: M.vowelSE, p3: M.mediaYW },
-      // p1 + p2 + p3 => p2 + p3 + p1
-      { num: 3, out: 3, t:2, p1: M.vowelSE, p2: M.vowelVR, p3: M.consonT },
-      // p1 + p2 => p2 + p1
-      { num: 2, out: 2, t:1, p1: M.vowelSE, p2: M.mediaYH },
-      { num: 2, out: 2, t:1, p1: M.vowelAN, p2: M.vowelAI },
-      { num: 2, out: 2, t:1, p1: M.vowelAU, p2: M.vowelIA },
-      { num: 2, out: 2, t:1, p1: M.vowelVT, p2: M.vowelAU },
-      { num: 2, out: 2, t:1, p1: M.vowelUU, p2: M.vowelSI },
-      { num: 2, out: 2, t:1, p1: M.vowelIN, p2: M.vowelIU },
-      { num: 2, out: 2, t:1, p1: M.mediaWA, p2: M.mediaYR },
-      { num: 2, out: 2, t:1, p1: M.mediaHA, p2: M.mediaYW }
+    // p1 + p2 + p3 + p4 => p4 + p1 + p2 + p3
+    { num: 4, out: 4, t:1, p1: M.mediaWA, p2: M.mediaHA, p3: M.vowelSE, p4: M.mediaYR },
+    // p1 + p2 + p3 => p3 + p2
+    { num: 3, out: 2, t:1, p1: M.zeroLEN, p2: M.vowelSE, p3: M.consoTT },
+    // p1 + p2 + p3 => p3 + p1 + p2
+    { num: 3, out: 3, t:1, p1: M.mediaWA, p2: M.vowelSE, p3: M.mediaYR },
+    { num: 3, out: 3, t:1, p1: M.mediaWA, p2: M.mediaHA, p3: M.mediaYR },
+    { num: 3, out: 3, t:1, p1: M.mediaHA, p2: M.vowelSE, p3: M.mediaYW },
+    // p1 + p2 + p3 => p2 + p3 + p1
+    { num: 3, out: 3, t:2, p1: M.vowelSE, p2: M.vowelVR, p3: M.consoTT },
+    // p1 + p2 => p2 + p1
+    { num: 2, out: 2, t:1, p1: M.vowelSE, p2: M.mediaYH },
+    { num: 2, out: 2, t:1, p1: M.vowelAN, p2: M.vowelAI },
+    { num: 2, out: 2, t:1, p1: M.vowelAU, p2: M.vowelIA },
+    { num: 2, out: 2, t:1, p1: M.vowelVT, p2: M.vowelAU },
+    { num: 2, out: 2, t:1, p1: M.vowelUU, p2: M.vowelSI },
+    { num: 2, out: 2, t:1, p1: M.vowelIN, p2: M.vowelIU },
+    { num: 2, out: 2, t:1, p1: M.mediaWA, p2: M.mediaYR },
+    { num: 2, out: 2, t:1, p1: M.mediaHA, p2: M.mediaYW }
   ];
 
 //==================================================================
@@ -108,25 +108,25 @@
 //  \u1025 + \u103A => \u1009 + \u103A
 //  \u101E + \u103C + \u1031 + \u102C + \u103A => \u102A
 //==================================================================
-  var ADD_RULE = [ 
-      {num: 2, out: '\u1026', p1: M.vowelSU, p2: M.vowelDI},
-      {num: 2, out: '\u1009\u103A', p1: M.vowelSU, p2: M.vowelAT},
-      {num: 5, out: '\u102A', p1: M.consnSA, p2: M.mediaRA, p3: M.vowelSE, p4: M.vowelSA, p5: M.vowelAT}
+  var ADD_RULE = [
+    {num: 2, out: '\u1026', p1: M.vowelSU, p2: M.vowelDI},
+    {num: 2, out: '\u1009\u103A', p1: M.vowelSU, p2: M.vowelAT},
+    {num: 5, out: '\u102A', p1: M.consoSA, p2: M.mediaRA, p3: M.vowelSE, p4: M.vowelSA, p5: M.vowelAT}
   ];
 
 //==================================================================
-//  \u1039 + consonT[*] + \u1031 + < VK_BACK > => \u1039 + $filler + \u1031
-//  \u200B + consonT[*] + \u1031 + < VK_BACK > => $filler + \u1031
+//  \u1039 + consoTT[*] + \u1031 + < VK_BACK > => \u1039 + $filler + \u1031
+//  \u200B + consoTT[*] + \u1031 + < VK_BACK > => $filler + \u1031
 //  mediaYH[*] + \u1031 + < VK_BACK > => \u1031
-//  \u1039 + consonT[*] + < VK_BACK > => NULL
+//  \u1039 + consoTT[*] + < VK_BACK > => NULL
 //  \u200B + \u1031 + < VK_BACK > => NULL
 //==================================================================
   var DEL_RULE = [
-      {num: 3, out: '\u1031\u1039', p1: M.vowelVR, p2: M.consonT, p3: M.vowelSE},
-      {num: 2, out: '\u200B\u1031', p1: M.consonT, p2: M.vowelSE},
-      {num: 2, out: '\u1031', p1: M.mediaYH, p2: M.vowelSE},
-      {num: 2, out: '', p1: M.vowelVR, p2: M.consonT},
-      {num: 2, out: '', p1: M.zeroLEN, p2: M.vowelSE}
+    {num: 3, out: '\u1031\u1039', p1: M.vowelVR, p2: M.consoTT, p3: M.vowelSE},
+    {num: 2, out: '\u200B\u1031', p1: M.consoTT, p2: M.vowelSE},
+    {num: 2, out: '\u1031', p1: M.mediaYH, p2: M.vowelSE},
+    {num: 2, out: '', p1: M.vowelVR, p2: M.consoTT},
+    {num: 2, out: '', p1: M.zeroLEN, p2: M.vowelSE}
   ];
 
   function myanParser(rule, callback) {
@@ -177,7 +177,6 @@
             return null;
           }
           var s = {};
-        console.log('mykeyboard - adds(' + entry.out +')');
           s.num = entry.num;
           s.str = entry.out;
           return s;
@@ -186,7 +185,7 @@
     return (adds) ? callback(adds) : callback(swap);
   }
 
-  function backspace(callback) {
+  function doDelete(callback) {
     var dels = myanParser(DEL_RULE, function(entry) {
           if (!entry) {
             return null;
@@ -202,11 +201,7 @@
 
   function overrideInput(s) {
     if(s) {
-      var bsstr = '';
-      for (var i=0; i < s.num; i++) {
-        bsstr = bsstr + String.fromCharCode(KeyEvent.DOM_VK_BACK_SPACE);
-      }
-      keyboard.sendString(bsstr + s.str);
+      keyboard.replaceSurroundingText(s.str, -s.num, s.num);
       return true;
     }
 
@@ -226,7 +221,7 @@
       });
 
       if (keycode == BACKSPACE) {
-        if(!backspace(overrideInput)) {
+        if(!doDelete(overrideInput)) {
           keyboard.sendKey(keycode)
         }
       }
