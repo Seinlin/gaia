@@ -5,7 +5,6 @@
 /* jshint moz:true */
 /* jshint unused:true */
 /* global InputMethods */
-/* global KeyEvent */
 
 (function() {
   'use strict';
@@ -83,7 +82,8 @@
 //==================================================================
   var SWAP_RULE = [
     // p1 + p2 + p3 + p4 => p4 + p1 + p2 + p3
-    { num: 4, out: 4, t:1, p1: M.mediaWA, p2: M.mediaHA, p3: M.vowelSE, p4: M.mediaYR },
+    { num: 4, out: 4, t:1, p1: M.mediaWA, p2: M.mediaHA, p3: M.vowelSE,
+      p4: M.mediaYR },
     // p1 + p2 + p3 => p3 + p2
     { num: 3, out: 2, t:1, p1: M.zeroLEN, p2: M.vowelSE, p3: M.consoTT },
     // p1 + p2 + p3 => p3 + p1 + p2
@@ -109,9 +109,10 @@
 //  \u101E + \u103C + \u1031 + \u102C + \u103A => \u102A
 //==================================================================
   var ADD_RULE = [
-    {num: 2, out: '\u1026', p1: M.vowelSU, p2: M.vowelDI},
-    {num: 2, out: '\u1009\u103A', p1: M.vowelSU, p2: M.vowelAT},
-    {num: 5, out: '\u102A', p1: M.consoSA, p2: M.mediaRA, p3: M.vowelSE, p4: M.vowelSA, p5: M.vowelAT}
+    { num: 2, out: '\u1026', p1: M.vowelSU, p2: M.vowelDI },
+    { num: 2, out: '\u1009\u103A', p1: M.vowelSU, p2: M.vowelAT },
+    { num: 5, out: '\u102A', p1: M.consoSA, p2: M.mediaRA, p3: M.vowelSE,
+      p4: M.vowelSA, p5: M.vowelAT }
   ];
 
 //==================================================================
@@ -147,7 +148,7 @@
           break;
         }
       }
-      if (j == 0) {
+      if (j === 0) {
         console.log('mykeyboard - myanparser hit : i(' + i + ')');
         return callback(rule[i]);
       }
@@ -214,7 +215,6 @@
     },
 
     click: function(keycode) {
-      var s = String.fromCharCode(keycode);
 
       keyboard.setUpperCase({
           isUpperCase: false
@@ -222,7 +222,7 @@
 
       if (keycode == BACKSPACE) {
         if(!doDelete(overrideInput)) {
-          keyboard.sendKey(keycode)
+          keyboard.sendKey(keycode);
         }
       }
       else {
@@ -230,13 +230,12 @@
           // Send an extra zero length space on click of vowel sign E.
           keyboard.sendKey('\u200B'.charCodeAt(0));
         }
-        keyboard.sendKey(keycode)
+        keyboard.sendKey(keycode);
       }
     },
 
     surroundingtextChange: function(detail) {
       buffer = detail.beforeString;
-      console.log('mykeyboard - surroundingtextChange : b(' + buffer + ')[' + buffer.length + ']');
       processBuffer(overrideInput);
     }
   };
