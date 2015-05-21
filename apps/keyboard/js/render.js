@@ -86,6 +86,7 @@ const IMERender = (function() {
     // density used in media queries
 
     layoutWidth = layout.width || 10;
+    var secondLayout = layout.secondLayout || false;
     var totalWidth = document.getElementById('keyboard').clientWidth;
     var placeHolderWidth = totalWidth / layoutWidth;
     var inputType = flags.inputType || 'text';
@@ -155,7 +156,8 @@ const IMERender = (function() {
           });
         }
 
-        kbRow.appendChild(buildKey(upperCaseKeyChar, className, keyWidth + 'px',
+        var outputChar = (secondLayout) ? keyChar : upperCaseKeyChar;
+        kbRow.appendChild(buildKey(outputChar, className, keyWidth + 'px',
           dataset, key.altNote, attributeList));
       }));
 

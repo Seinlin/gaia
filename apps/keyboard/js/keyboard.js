@@ -1663,6 +1663,12 @@ function showKeyboard() {
     'keyboard.current': keyboardName
   });
 
+  var keyboard = Keyboards[keyboardName];
+  var engine = InputMethods[keyboard.imEngine];
+  if (engine && typeof engine.surroundingtextChange === 'function') {
+    inputContext.addEventListener('surroundingtextchange', engine.surroundingtextChange);
+  }
+
   function doShowKeyboard() {
     // Force to disable the auto correction for Greek SMS layout.
     // This is because the suggestion result is still unicode and
@@ -1698,6 +1704,7 @@ function hideKeyboard() {
     return;
 
   clearTimeout(hideKeyboardTimeout);
+  //inputContext.removeEventListener('surroundingtextchange', this);
 
   // For quick blur/focus events we don't want to hide the IME div
   // to avoid flickering and such
