@@ -222,6 +222,7 @@ const IMERender = (function() {
             value: 'true'
           });
         }
+
         var outputChar = flags.uppercase ? upperCaseKeyChar : keyChar;
         kbRow.appendChild(buildKey(outputChar, className, keyWidth + 'px',
           dataset, key.altNote, attributeList));
