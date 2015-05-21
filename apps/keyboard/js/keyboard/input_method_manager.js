@@ -323,6 +323,9 @@ InputMethodManager.prototype.switchCurrentIMEngine = function(imEngineName,
     if (typeof imEngine.activate === 'function') {
       imEngine.activate.apply(imEngine, dataValues);
     }
+    if (typeof imEngine.surroundingtextChange === 'function') {
+      this.app.inputContext.addEventListener('surroundingtextchange', imEngine.surroundingtextChange);
+    }
     this.currentIMEngine = imEngine;
 
     // resolve to undefined
