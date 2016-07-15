@@ -1,0 +1,59 @@
+{
+  "name": "Test BC",
+  "description": "BC test app",
+  "launch_path": "/index.html",
+  "developer": {
+    "name": "Seinlin",
+    "url": "https://github.com/seinlin/gaia"
+  },
+  "locales": {
+    "ar": {
+      "name": "Test BC",
+      "description": "BC test app"
+    },
+    "de": {
+      "name": "Test BC",
+      "description": "BC test app"
+    },
+    "el": {
+      "name": "Test BC",
+      "description": "BC test app"
+    },
+    "en-US": {
+      "name": "Test BC",
+      "description": "BC test app"
+    },
+    "es": {
+      "name": "Test BC",
+      "description": "BC test app"
+    },
+    "fr": {
+      "name": "Test BC",
+      "description": "BC test app"
+    },
+    "it": {
+      "name": "Test BC",
+      "description": "BC test app"
+    },
+    "pt-BR": {
+      "name": "Test BC",
+      "description": "BC test app"
+    },
+    "ru": {
+      "name": "Test BC",
+      "description": "BC test app"
+    },
+    "tr": {
+      "name": "Test BC",
+      "description": "BC test app"
+    },
+    "zh-TW": {
+      "name": "Test BC",
+      "description": "BC test app"
+    }
+  },
+  "default_locale": "en-US",
+  "icons": {
+    "128": "/style/icons/Blank.png"
+  }
+}
