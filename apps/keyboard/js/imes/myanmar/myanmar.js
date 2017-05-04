@@ -19,7 +19,7 @@
              '\u1009|\u100A|\u100B|\u100C|\u100D|\u100E|\u100F|\u1010|' +
              '\u1011|\u1012|\u1013|\u1014|\u1015|\u1016|\u1017|\u1018|' +
              '\u1019|\u101A|\u101B|\u101C|\u101D|\u101E|\u101F|\u1020|' +
-             '\u1021' + ')$'),
+             '\u1021|\u1004' + ')$'),
     consoSA: new RegExp('^(' +  '\u101E' + ')$'),
     vowelIA: new RegExp('^(' +
              '\u102D|\u102E|\u1032|\u1036|\u102F|\u1030|\u102B|\u102C' + ')$'),
@@ -81,9 +81,12 @@
 //  vowelIN[*] + vowelSI[*] => $2 + $1
 //==================================================================
   var SWAP_RULE = [
+    { num: 5, out: 4, t:4, p1: M.zeroLEN, p2: M.consoTT, p3: M.vowelAT, p4: M.vowelVR, p5: M.consoTT},
     // p1 + p2 + p3 + p4 => p4 + p1 + p2 + p3
-    { num: 4, out: 4, t:1, p1: M.mediaWA, p2: M.mediaHA, p3: M.vowelSE,
-      p4: M.mediaYR },
+    { num: 4, out: 4, t:1, p1: M.mediaWA, p2: M.mediaHA, p3: M.vowelSE, p4: M.mediaYR },
+    // special t=0 rule
+    { num: 4, out: 4, t:0, p1: M.consoTT, p2: M.vowelAT, p3: M.zeroLEN, p4: M.vowelVR },
+    { num: 3, out: 2, t:3, p1: M.consoTT, p2: M.zeroLEN, p3: M.vowelVR },
     // p1 + p2 + p3 => p3 + p2
     { num: 3, out: 2, t:1, p1: M.zeroLEN, p2: M.vowelSE, p3: M.consoTT },
     // p1 + p2 + p3 => p3 + p1 + p2
@@ -161,13 +164,23 @@
       if (!entry) {
         return null;
       }
+      console.log('Swap match');
       var len = buffer.length;
       var tail = entry.t;
       var out = entry.out;
       var s = {};
       s.num = entry.num;
-      s.str = buffer.substr(len-tail, tail) +
-              buffer.substr(len-out, out-tail);
+      if(tail==s.num) {
+        s.str = buffer.substr(len-3, 1) +
+                buffer.substr(len-1, 1);
+      } else if(tail==0) {
+        s.str = buffer.substr(len-2, 1) +
+                buffer.substr(len-out, 2) +
+                buffer.substr(len-1, 1);
+      } else {
+        s.str = buffer.substr(len-tail, tail) +
+                buffer.substr(len-out, out-tail);
+      }
       return s;
     });
 
@@ -176,6 +189,7 @@
       if (!entry) {
         return null;
       }
+      console.log('Add match');
       var s = {};
       s.num = entry.num;
       s.str = entry.out;
@@ -190,6 +204,7 @@
       if (!entry) {
         return null;
       }
+      console.log('Del match');
       var s = {};
       s.num = entry.num;
       s.str = entry.out;
@@ -225,7 +240,8 @@
         }
       }
       else {
-        if (String.fromCharCode(keycode) == '\u1031') {
+        if (String.fromCharCode(keycode) == '\u1031' ||
+            String.fromCharCode(keycode) == '\u1039') {
           // Send an extra zero length space on click of vowel sign E.
           keyboard.sendKey('\u200B'.charCodeAt(0));
         }

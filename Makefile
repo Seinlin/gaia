@@ -446,7 +446,7 @@ GAIA_PRETRANSLATE?=1
 GAIA_CONCAT_LOCALES?=1
 
 # This variable is for customizing the keyboard layouts in a build.
-GAIA_KEYBOARD_LAYOUTS?=en,pt-BR,es,de,fr,fr-CA,pl,ko,zh-Hans-Pinyin,en-Dvorak
+GAIA_KEYBOARD_LAYOUTS?=en,my,pt-BR,es,de,fr,fr-CA,pl,ko,zh-Hans-Pinyin,en-Dvorak
 # We optionally offers downloading the dictionary from the CDN, instead of
 # including it in the build.
 # Latin IMEngine-backed layouts specified under this variable will have
